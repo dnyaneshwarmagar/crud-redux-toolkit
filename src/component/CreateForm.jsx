@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createUser } from "../features/userDetailsSlice";
+import { useNavigate } from "react-router-dom";
 
 const CreateForm = () => {
   const [users, setUsers] = useState({});
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const getUserData = (e) => {
     setUsers({ ...users, [e.target.name]: e.target.value });
@@ -14,6 +16,10 @@ const CreateForm = () => {
     e.preventDefault();
     console.log("users: ", users);
     dispatch(createUser(users));
+    let ans = confirm("Added successfully! , Go to check details of on All Post page");
+    if(ans){
+      navigate("/users")
+    }
   };
   return (
     <div>

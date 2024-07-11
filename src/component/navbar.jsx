@@ -1,13 +1,17 @@
 import React,{useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { searchUser } from '../features/userDetailsSlice';
+import { getUsers, searchUser } from '../features/userDetailsSlice';
 
 const navbar = () => {
   const [searchData,setSearchData] = useState("");
   const dispatch = useDispatch()
 
   const allUsers = useSelector(state=>state.userDetailsData.users);
+
+  useEffect(()=>{
+    dispatch(getUsers())
+  },[]);
 
   useEffect(()=>{
     dispatch(searchUser(searchData))
